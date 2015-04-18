@@ -1,0 +1,132 @@
+#=====================================================================
+# Internatioinal SQL-Ledger-Network Association
+# Copyright (c) 2014
+#
+#  Author: Sebastian Weitmann
+#     Web: http://www.sql-ledger-network.com
+#   Email: info@sql-ledger-network.com
+#
+#  Edited: Maik Wagner (modifications to work on Ubuntu 14.04.2)
+#     Web: http://www.tapwag.org
+#   Email: maiktapwagner@aol.com
+#   
+#======================================================================
+#
+# Installation Script for SQL-Ledger Network Version (ledger123)
+# including LedgerCart
+# for Ubuntu 14.04.2 (Trusty Tahr) 
+#
+#======================================================================
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details:
+# <http://www.gnu.org/licenses/>.
+#======================================================================
+#
+# This script calls the installation function.
+#
+#!/bin/bash
+
+# Hauptinstallationsroutine / Main installation routine
+
+installation ()
+{
+
+clear 
+echo "Updating dependencies..."
+
+cd ~/  
+apt-get install debian-archive-keyring
+apt-key update 
+apt-get update 
+apt-get upgrade 
+apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential
+cpan CGI::FormBuilder DBIx::XHTML_Table
+cpan GD
+cpan GD::Thumbnail
+cpan MIME::Lite::TT::HTML
+a2ensite default-ssl
+service apache2 reload
+a2enmod ssl
+a2enmod cgi
+service apache2 restart
+cd /var/www/html
+git clone https://github.com/ledger123/ledger123.git ledger123
+cd /var/www/html/ledger123
+git clone git://github.com/ledger123/ledgercart.git ledgercart
+mkdir spool
+cd /var/www/html/ledger123/users
+wget http://www.sql-ledger-network.com/debian/demo_users.tar.gz --retr-symlinks=no
+tar -xvf demo_users.tar.gz
+cd /var/www/ledger123
+wget http://www.sql-ledger-network.com/debian/demo_templates.tar.gz --retr-symlinks=no
+tar -xvf demo_templates.tar.gz
+chown -hR www-data.www-data users templates css spool
+cp sql-ledger.conf.default sql-ledger.conf
+git checkout -b rel3 origin/rel3
+git checkout rel3
+cd ~/
+wget http://www.sql-ledger-network.com/debian/sl_index.html --retr-symlinks=no
+mv sl_index.html /var/www/index.html
+wget http://www.sql-ledger-network.com/debian/sql-ledger --retr-symlinks=no
+cp sql-ledger /etc/apache2/sites-available/
+cd /etc/apache2/sites-enabled/
+ln -s ../sites-available/sql-ledger 001-sql-ledger
+service apache2 restart
+cd ~/
+
+# Postgres Installation 
+
+clear
+echo "Initialising Postgres - Press RETURN to continue"
+read confirmation
+
+locale-gen de_DE.UTF-8
+pg_createcluster 9.3 main --start
+
+
+wget http://www.sql-ledger-network.com/debian/pg_hba.conf --retr-symlinks=no
+cp pg_hba.conf /etc/postgresql/9.3/main/
+service postgresql restart
+su postgres -c "createuser -d -S -R sql-ledger"
+su postgres -c "createdb ledgercart"
+su postgres -c "psql ledgercart < /var/www/ledger123/ledgercart/sql/ledgercart.sql"
+su postgres -c "psql ledgercart < /var/www/ledger123/ledgercart/sql/schema.sql"
+su postgres -c "psql -U postgres ledgercart < /var/www/ledger123/sql/Pg-custom_tables.sql"
+cp /var/www/ledger123/ledgercart/config-default.pl /var/www/ledger123/ledgercart/config.pl
+
+}
+
+
+# Main program
+
+clear
+echo "Copyright (C) 2015  International SQL-Ledger Network Associaton"
+echo "This is free software, and you are welcome to redistribute it under"
+echo "certain conditions; See <http://www.gnu.org/licenses/> for more details"
+echo "This program comes with ABSOLUTELY NO WARRANTY"
+echo "Please type 'installation' to confirm installation or just type anything else to return to the command line."
+read input
+	
+if [ "$input" = "installation" ]; then
+		installation 
+	     	clear
+		echo 
+		echo "Thank you for your patience! The automatic installation has now been completed."
+		echo
+		echo "You should now be able to login to the latest SQL-Ledger Network version (ledger123) as 'admin' on http://yourserver_ip/ledger123"
+		echo "And don't forget to also checkout the latest version of LedgerCart on http://yourserver_ip/ledger123/ledgercart"
+		echo 
+		echo "Visit http://www.sql-ledger-network.com for more information on SQL-Ledger"
+		echo "Visit http://forum.sql-ledger-network.com for support"
+		echo "Suggestions for improvement and other feedback can be emailed to 'info@sql-ledger-network.com'. Thanks!"
+		echo
+		echo "IMPORTANT NOTE: This simple installation was designed to be run only on the local network."
+fi
+exit 0
