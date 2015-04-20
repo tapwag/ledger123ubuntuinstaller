@@ -64,7 +64,7 @@ mkdir spool
 cd /var/www/html/ledger123/users
 wget http://www.sql-ledger-network.com/debian/demo_users.tar.gz --retr-symlinks=no
 tar -xvf demo_users.tar.gz
-cd /var/www/ledger123
+cd /var/www/html/ledger123
 wget http://www.sql-ledger-network.com/debian/demo_templates.tar.gz --retr-symlinks=no
 tar -xvf demo_templates.tar.gz
 chown -hR www-data.www-data users templates css spool
