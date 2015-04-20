@@ -77,7 +77,7 @@ git checkout -b rel3 origin/rel3
 git checkout rel3
 cd ~/
 wget http://www.sql-ledger-network.com/debian/sl_index.html --retr-symlinks=no
-mv sl_index.html /var/www/index.html
+mv sl_index.html /var/www/html/index.html
 wget http://www.sql-ledger-network.com/debian/sql-ledger --retr-symlinks=no
 cp sql-ledger /etc/apache2/sites-available/
 cd /etc/apache2/sites-enabled/
