@@ -103,7 +103,7 @@ echo "Initialising Postgres - Press RETURN to continue"
 read confirmation
 apt-get install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
 locale-gen de_DE.UTF-8
-pg_createcluster 9.3 main --start
+pg_createcluster --locale=de_DE.UTF-8 --encoding=UTF-8 9.3 main --start
 
 wget http://www.sql-ledger-network.com/debian/pg_hba.conf --retr-symlinks=no
 cp pg_hba.conf /etc/postgresql/9.3/main/
