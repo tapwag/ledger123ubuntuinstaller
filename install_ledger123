@@ -43,6 +43,7 @@ echo "Updating dependencies..."
 
 cd ~/  
 apt-get install debian-archive-keyring
+add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 apt-key update 
 apt-get update 
 apt-get upgrade 
