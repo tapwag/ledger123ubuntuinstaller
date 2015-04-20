@@ -46,7 +46,7 @@ apt-get install debian-archive-keyring
 apt-key update 
 apt-get update 
 apt-get upgrade 
-apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential
+apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential git
 cpan CGI::FormBuilder DBIx::XHTML_Table
 cpan GD
 cpan GD::Thumbnail
