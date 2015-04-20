@@ -49,6 +49,7 @@ apt-get update
 apt-get upgrade 
 apt-get install git
 apt-get install libdbd-pg-perl libdbix-simple-perl
+apt-get install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
 apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential git libdbix-simple-perl
 cpan CGI::FormBuilder DBIx::XHTML_Table
 cpan GD
@@ -101,7 +102,6 @@ cd ~/
 clear
 echo "Initialising Postgres - Press RETURN to continue"
 read confirmation
-apt-get install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
 locale-gen de_DE.UTF-8
 pg_createcluster --locale=de_DE.UTF-8 --encoding=UTF-8 9.3 main --start
 
@@ -110,10 +110,10 @@ cp pg_hba.conf /etc/postgresql/9.3/main/
 service postgresql restart
 su postgres -c "createuser -d -S -R sql-ledger"
 su postgres -c "createdb ledgercart"
-su postgres -c "psql ledgercart < /var/www/ledger123/ledgercart/sql/ledgercart.sql"
-su postgres -c "psql ledgercart < /var/www/ledger123/ledgercart/sql/schema.sql"
-su postgres -c "psql -U postgres ledgercart < /var/www/ledger123/sql/Pg-custom_tables.sql"
-cp /var/www/ledger123/ledgercart/config-default.pl /var/www/ledger123/ledgercart/config.pl
+su postgres -c "psql ledgercart < /var/www/html/ledger123/ledgercart/sql/ledgercart.sql"
+su postgres -c "psql ledgercart < /var/www/html/ledger123/ledgercart/sql/schema.sql"
+su postgres -c "psql -U postgres ledgercart < /var/www/html/ledger123/sql/Pg-custom_tables.sql"
+cp /var/www/ledger123/ledgercart/config-default.pl /var/www/html/ledger123/ledgercart/config.pl
 
 }
 
