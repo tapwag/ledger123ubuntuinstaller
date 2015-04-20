@@ -78,6 +78,19 @@ wget http://www.sql-ledger-network.com/debian/sql-ledger --retr-symlinks=no
 cp sql-ledger /etc/apache2/sites-available/
 cd /etc/apache2/sites-enabled/
 ln -s ../sites-available/sql-ledger 001-sql-ledger
+
+echo "AddHandler cgi-script .pl" >> /etc/apache2/apache2.conf
+echo "Alias /ledger123/ /var/www/html/ledger123/" >> /etc/apache2/apache2.conf
+echo "<Directory /var/www/html/ledger123>" >> /etc/apache2/apache2.conf
+echo "Options ExecCGI Includes FollowSymlinks" >> /etc/apache2/apache2.conf
+echo "</Directory>" >> /etc/apache2/apache2.conf
+echo "<Directory /var/www/html/ledger123/users>" >> /etc/apache2/apache2.conf
+echo "Order Deny,Allow" >> /etc/apache2/apache2.conf
+echo "Deny from All" >> /etc/apache2/apache2.conf
+echo "</Directory>" >> /etc/apache2/apache2.conf
+
+
+
 service apache2 restart
 cd ~/
 
