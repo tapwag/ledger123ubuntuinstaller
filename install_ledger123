@@ -47,7 +47,7 @@ add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) univ
 apt-key update 
 apt-get update 
 apt-get upgrade 
-apt-get install git libcgi-simple-perl libtemplate-perl libxml-simple-perl
+apt-get install git libcgi-simple-perl libtemplate-perl libxml-simple-perl libdate-calc-perl
 apt-get install libdbd-pg-perl libdbix-simple-perl
 apt-get install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
 apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential git libdbix-simple-perl
