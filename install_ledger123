@@ -1,6 +1,6 @@
 #=====================================================================
 # Internatioinal SQL-Ledger-Network Association
-# Copyright (c) 2014
+# Copyright (c) 2014-2015
 #
 #  Author: Sebastian Weitmann
 #     Web: http://www.sql-ledger-network.com
@@ -16,6 +16,8 @@
 # including LedgerCart
 # for Ubuntu 14.04.2 (Trusty Tahr) 
 #
+# Please note that Ledgercart is not working properly on Ubuntu 14.04
+# yet. Some Perl code needs to be adjusted.
 #======================================================================
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -47,12 +49,11 @@ add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) univ
 apt-key update 
 apt-get update 
 apt-get upgrade 
-apt-get install git libcgi-simple-perl libtemplate-perl libxml-simple-perl libdate-calc-perl
-apt-get install libdbd-pg-perl libdbix-simple-perl
+apt-get install git libcgi-simple-perl libtemplate-perl libxml-simple-perl libdate-calc-perl libgd-gd2-perl
+apt-get install libdbd-pg-perl libdbix-simple-perl libmime-lite-perl
 apt-get install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
 apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential git libdbix-simple-perl
 cpan CGI::FormBuilder DBIx::XHTML_Table
-cpan GD
 cpan GD::Thumbnail
 cpan MIME::Lite::TT::HTML
 a2ensite default-ssl
@@ -125,7 +126,11 @@ echo "Copyright (C) 2015  International SQL-Ledger Network Associaton"
 echo "This is free software, and you are welcome to redistribute it under"
 echo "certain conditions; See <http://www.gnu.org/licenses/> for more details"
 echo "This program comes with ABSOLUTELY NO WARRANTY"
-echo "Please type 'installation' to confirm installation or just type anything else to return to the command line."
+echo "PLEASE NOTE:"
+echo "This script will make some fairly major changes to your Ubuntu system:"
+echo "- Adding universe repository"
+echo "- Modifying the main apache2.conf file to handle the SQL Ledger directory which will be in the default document root: /var/www/html"
+echo "If you agree to these changes to your Ubuntu system please type 'installation'. Any other input will back you out and return to the command line."
 read input
 	
 if [ "$input" = "installation" ]; then
