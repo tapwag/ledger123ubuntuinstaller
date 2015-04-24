@@ -1,3 +1,4 @@
+#!/bin/bash
 #=====================================================================
 # Internatioinal SQL-Ledger-Network Association
 # Copyright (c) 2014-2015
@@ -33,7 +34,6 @@
 #
 # This script calls the installation function.
 #
-#!/bin/bash
 
 # Hauptinstallationsroutine / Main installation routine
 
@@ -44,15 +44,15 @@ clear
 echo "Updating dependencies..."
 
 cd ~/  
-apt-get install debian-archive-keyring
+apt-get -y install debian-archive-keyring
 add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 apt-key update 
 apt-get update 
 apt-get upgrade 
-apt-get install git libcgi-simple-perl libtemplate-perl libxml-simple-perl libdate-calc-perl libgd-gd2-perl
-apt-get install libdbd-pg-perl libdbix-simple-perl libmime-lite-perl
-apt-get install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
-apt-get install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential git libdbix-simple-perl
+apt-get -y install git libcgi-simple-perl libtemplate-perl libxml-simple-perl libdate-calc-perl libgd-gd2-perl
+apt-get -y install libdbd-pg-perl libdbix-simple-perl libmime-lite-perl
+apt-get -y install libpq5 postgresql-9.3 postgresql-client-9.3 postgresql-client-common
+apt-get -y install acpid apache2 openssl ssl-cert postgresql libdbix-simple-perl libcgi-simple-perl libtext-markdown-perl libdbi-perl libdbd-pg-perl libobject-signature-perl git-core gitweb postfix mailutils texlive nano libhtml-template-perl make cpan libtemplate-perl libnumber-format-perl libuser-simple-perl lynx libcgi-formbuilder-perl libmime-lite-perl libtext-markdown-perl libdate-calc-perl libtemplate-plugin-number-format-perl libgd-gd2-perl libdatetime-perl libhtml-format-perl libmime-tools-perl apg libgd2-xpm-dev build-essential git libdbix-simple-perl
 cpan CGI::FormBuilder DBIx::XHTML_Table
 cpan GD::Thumbnail
 cpan MIME::Lite::TT::HTML
