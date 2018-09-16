@@ -1,21 +1,21 @@
 #!/bin/bash
 #=====================================================================
 # Internatioinal SQL-Ledger-Network Association
-# Copyright (c) 2014-2018
+# Copyright (c) 2014-2015
 #
 #  Author: Sebastian Weitmann
 #     Web: http://www.sql-ledger-network.com
 #   Email: info@sql-ledger-network.com
 #
-#  Edited: Maik Wagner (modifications to work on Ubuntu 18.04.)
+#  Edited: Maik Wagner (modifications to work on Ubuntu 14.04.2)
 #     Web: http://www.linuxandlanguages.com
-#   Email: maiktapwagner@aol.com
+#   Email: linuxandlanguages@t-online.de
 #   
 #======================================================================
 #
 # Installation Script for SQL-Ledger Network Version (ledger123)
 # including LedgerCart
-# for Ubuntu 18.04 (Trusty Tahr) 
+# for Ubuntu 18.04 (Xenial) 
 #
 # Please note that Ledgercart is not working properly on Ubuntu 14.04
 # yet. Some Perl code needs to be adjusted.
